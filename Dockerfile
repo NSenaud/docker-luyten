@@ -10,6 +10,8 @@ RUN dnf update -y && \
     python-pip \
     clang \
     wget \
+    tar \
+    gtest \
     opencv \
     git && \
   wget http://www.apache.org/dyn/closer.cgi/logging/log4cxx/0.10.0/apache-log4cxx-0.10.0.tar.gz && \
