@@ -7,12 +7,14 @@ RUN dnf update -y && \
   dnf install -y \
     make \
     cmake \
-    log4cxx \
     python-pip \
     clang \
     wget \
     opencv \
     git && \
+  wget http://www.apache.org/dyn/closer.cgi/logging/log4cxx/0.10.0/apache-log4cxx-0.10.0.tar.gz && \
+  tar -xvzf apache-log4cxx-0.10.0.tar.gz && \
+  (cd apache-log4cxx-0.10.0 && ./configure && make && make check && make install) && \
   rm -rf \
     /tmp/* \
     /var/tmp/* && \
