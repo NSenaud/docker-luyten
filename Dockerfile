@@ -3,8 +3,7 @@ MAINTAINER Nicolas Senaud <nicolas@senaud.fr>
 
 ENV USER root
 
-RUN
-    pacman -Syu --noconfirm && \
+RUN pacman -Syu --noconfirm && \
     pacman -S --noconfirm --needed wget base-devel yajl && \
     wget https://aur.archlinux.org/cgit/aur.git/snapshot/package-query.tar.gz && \
     tar xfz package-query.tar.gz && \
