@@ -1,26 +1,31 @@
-FROM fedora:rawhide
+FROM base/archlinux
 MAINTAINER Nicolas Senaud <nicolas@senaud.fr>
 
 ENV USER root
 
-RUN dnf update -y && \
-  dnf install -y \
-    make \
-    cmake \
-    python-pip \
-    clang \
-    wget \
-    tar \
-    gtest \
-    opencv \
-    git && \
-  wget http://www.apache.org/dyn/closer.cgi/logging/log4cxx/0.10.0/apache-log4cxx-0.10.0.tar.gz && \
-  tar -xvzf apache-log4cxx-0.10.0.tar.gz && \
-  (cd apache-log4cxx-0.10.0 && ./configure && make && make check && make install) && \
-  rm -rf \
-    /tmp/* \
-    /var/tmp/* && \
-  mkdir /source
+RUN
+    pacman -Syu --noconfirm && \
+    pacman -S --noconfirm --needed wget base-devel yajl && \
+    wget https://aur.archlinux.org/cgit/aur.git/snapshot/package-query.tar.gz && \
+    tar xfz package-query.tar.gz && \
+    (cd package-query  &&  makepkg && pacman -U --noconfirm package-query*.pkg.tar.xz) && \
+    wget https://aur.archlinux.org/cgit/aur.git/snapshot/yaourt.tar.gz && \
+    tar xzf yaourt.tar.gz && \
+    (cd yaourt  &&  makepkg && pacman -U --noconfirm yaourt*.pkg.tar.xz) && \
+    pacman -Sy --noconfirm \
+        make \
+        cmake \
+        clang \
+        wget \
+        gtest \
+        opencv \
+        git && \
+    yaourt -Sy --noconfirm \
+        log4cxx \
+    rm -rf \
+        /tmp/* \
+        /var/tmp/* && \
+    mkdir /source
 VOLUME ["/source"]
 WORKDIR /source
 CMD ["/bin/bash"]
