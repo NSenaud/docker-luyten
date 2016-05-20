@@ -3,7 +3,7 @@ MAINTAINER Nicolas Senaud <nicolas@senaud.fr>
 
 ENV USER root
 
-RUN pacman -r 2072D77A && pacman -r 498E9CEE && pacman -r B02854ED753E0F1F
+RUN pacman -r 2072D77A && pacman -r 498E9CEE && pacman -r B02854ED753E0F1F && \
     pacman -Syu --noconfirm && \
     pacman -S --noconfirm --needed wget base-devel yajl && \
     wget https://aur.archlinux.org/cgit/aur.git/snapshot/package-query.tar.gz && \
