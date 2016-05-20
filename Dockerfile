@@ -1,4 +1,4 @@
-FROM fedora:latest
+FROM fedora:rawhide
 MAINTAINER Nicolas Senaud <nicolas@senaud.fr>
 
 ENV USER root
@@ -11,9 +11,8 @@ RUN dnf update -y && \
     python-pip \
     clang \
     wget \
+    opencv \
     git && \
-  wget https://kojipkgs.fedoraproject.org//packages/opencv/3.1.0/5.fc25/x86_64/opencv-3.1.0-5.fc25.x86_64.rpm && \
-  rpm -ivh opencv-3.1.0-5.fc25.x86_64.rpm && \
   rm -rf \
     /tmp/* \
     /var/tmp/* && \
