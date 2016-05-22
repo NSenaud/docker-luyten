@@ -24,7 +24,6 @@ RUN mkdir -p /tmp/Package/ && \
 RUN echo "export CC=clang" >> /etc/makepkg.conf && \
     echo "export CXX=clang++" >> /etc/makepkg.conf
 
-# Does not currectly build: https://aur.archlinux.org/packages/log4cxx/?comments=all
 USER yaourt
 RUN (cd /tmp/Package && \
      wget https://aur.archlinux.org/cgit/aur.git/snapshot/log4cxx.tar.gz && \
