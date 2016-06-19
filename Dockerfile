@@ -41,6 +41,14 @@ RUN rm -rf \
         /var/tmp/* && \
     mkdir /source
 
+# cpp_redis installation
+RUN git clone https://github.com/Cylix/cpp_redis.git && \
+    cd cpp_redis && \
+    mkdir build && \
+    cd build && \
+    cmake -DCMAKE_INSTALL_PREFIX=/usr/local/ .. && \
+    make install -j
+
 VOLUME ["/source"]
 WORKDIR /source
 CMD ["/bin/bash"]
