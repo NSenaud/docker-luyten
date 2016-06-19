@@ -9,6 +9,7 @@ RUN pacman -Syu --noconfirm && \
         make \
         cmake \
         clang \
+        boost \
         wget \
         gtest \
         opencv \
