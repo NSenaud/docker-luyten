@@ -15,7 +15,8 @@ RUN pacman -Syu --noconfirm && \
         opencv \
         git \
         zip \
-        apr-util
+        apr-util \
+        python-pip
 
 RUN useradd --no-create-home --shell=/bin/false yaourt && \
     usermod -L yaourt
@@ -36,18 +37,24 @@ USER root
 RUN (cd /tmp/Package/log4cxx && \
      pacman -U --noconfirm log4cxx*.pkg.tar.xz)
 
-RUN rm -rf \
-        /tmp/* \
-        /var/tmp/* && \
-    mkdir /source
-
 # cpp_redis installation
-RUN git clone https://github.com/Cylix/cpp_redis.git && \
+RUN cd /tmp/ && \
+    git clone https://github.com/Cylix/cpp_redis.git && \
     cd cpp_redis && \
     mkdir build && \
     cd build && \
     cmake -DCMAKE_INSTALL_PREFIX=/usr/local/ .. && \
     make install -j
+
+# Python dependencies
+RUN pip install jsonschema python-redis
+RUN pacman -S --noconfirm pyqt4-common
+
+# Cleanup and finalize
+RUN rm -rf \
+        /tmp/* \
+        /var/tmp/* && \
+    mkdir /source
 
 VOLUME ["/source"]
 WORKDIR /source
