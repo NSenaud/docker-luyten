@@ -16,7 +16,9 @@ RUN pacman -Syu --noconfirm && \
         git \
         zip \
         apr-util \
-        python-pip
+        python-pip \
+        phonon-qt4 \
+        phonon-qt4-vlc
 
 RUN useradd --no-create-home --shell=/bin/false yaourt && \
     usermod -L yaourt
